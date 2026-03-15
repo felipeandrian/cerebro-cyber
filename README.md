@@ -76,7 +76,7 @@ python chat.py
 
 ```
 
-![Demonstração do Terminal](./imagens/terminal.png)
+![Demonstração do Terminal](./imagens/chat.png)
 
 ### Contribuições (Vamos aprender juntos!)
 Este é um projeto voltado para o aprendizado em Inteligência Artificial, toda e qualquer correção, dica de otimização ou refatoração é extremamente bem-vinda!
