@@ -1,7 +1,7 @@
 # CerebroCyber: A From-Scratch Decoder-Only Transformer
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](LINK_DO_SEU_COLAB_AQUI)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/felipeandrian/cerebro-cyber/blob/main/notebook/cerebro-cyber-LLM.ipynb)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Educational_Implementation-orange)
@@ -12,7 +12,7 @@ O **CerebroCyber** é uma implementação educacional *from-scratch* (do zero) d
 Desenvolvido inteiramente em PyTorch, este projeto tem o objetivo de desmistificar a engenharia por trás de modelos fundacionais como GPT, Llama e Claude. Nenhuma biblioteca de abstração de alto nível (como `transformers` da Hugging Face) foi utilizada no core da arquitetura, garantindo controle total sobre a matemática matricial, o fluxo de tensores e o cálculo de gradientes.
 
 ### 📓 Google Colab (Recomendado)
-Se você quer apenas entender a lógica por trás do código sem configurar um ambiente local, **eu recomendo fortemente acessar o [Google Colab do Projeto](LINK_DO_SEU_COLAB_AQUI)**. Lá, o código foi quebrado em blocos interativos com explicações breves, comentários aprofundados sobre as decisões matemáticas e exemplos práticos de execução. É o melhor ponto de partida para explorar a arquitetura!
+Se você quer apenas entender a lógica por trás do código sem configurar um ambiente local, **eu recomendo fortemente acessar o [Google Colab do Projeto](https://colab.research.google.com/github/felipeandrian/cerebro-cyber/blob/main/notebook/cerebro-cyber-LLM.ipynb)**. Lá, o código foi quebrado em blocos interativos com explicações breves, comentários aprofundados sobre as decisões matemáticas e exemplos práticos de execução. É o melhor ponto de partida para explorar a arquitetura!
 
 ##  Decisões de Arquitetura
 
