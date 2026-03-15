@@ -8,3 +8,6 @@ chat2.py
 falar.py
 cerebrocyber.py
 dataset_cyber.bin
+dataloader.py
+test-compressor.py
+test_preparar_dados.py
