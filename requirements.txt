@@ -1,0 +1,11 @@
+# O motor matemático e de Deep Learning
+torch>=2.0.0
+
+# O processador de matrizes e arrays no HD (memmap)
+numpy>=1.24.0
+
+# O tokenizador oficial do GPT-4 (OpenAI)
+tiktoken>=0.5.0
+
+# O extrator de PDFs de alta performance
+PyMuPDF>=1.23.0

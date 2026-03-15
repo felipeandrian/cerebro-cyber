@@ -1,18 +1,35 @@
-#  CerebroCyber: Construindo um LLM do Zero
+# CerebroCyber: A From-Scratch Decoder-Only Transformer
 
-Este repositório documenta a minha jornada educacional de engenharia reversa e construção de um **Modelo de Linguagem (Language Model)** baseado na arquitetura Transformer (Decoder-Only), a mesma tecnologia fundamental por trás do GPT, Llama e Claude.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](LINK_DO_SEU_COLAB_AQUI)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Educational_Implementation-orange)
 
-O objetivo deste projeto não foi usar APIs prontas ou caixas pretas, mas sim entender a matemática, a engenharia de dados e a arquitetura de redes neurais profundas escrevendo cada linha de código em PyTorch.
+## 📌 Visão Geral
+O **CerebroCyber** é uma implementação educacional *from-scratch* (do zero) de um Modelo de Linguagem Grande (LLM) baseado na arquitetura **Transformer Decoder-Only**. 
 
-##  Arquitetura do Motor
+Desenvolvido inteiramente em PyTorch, este projeto tem o objetivo de desmistificar a engenharia por trás de modelos fundacionais como GPT, Llama e Claude. Nenhuma biblioteca de abstração de alto nível (como `transformers` da Hugging Face) foi utilizada no core da arquitetura, garantindo controle total sobre a matemática matricial, o fluxo de tensores e o cálculo de gradientes.
 
-O CerebroCyber foi construído com as seguintes especificações e componentes:
-* **Tokenização:** BPE (Byte-Pair Encoding) utilizando o padrão `cl100k_base` (mesmo vocabulário do GPT-4).
-* **Embeddings:** Projeção dimensional de tokens e codificação posicional (Positional Encoding).
-* **Masked Multi-Head Attention:** O núcleo de raciocínio, utilizando matrizes triangulares inferiores para garantir a previsão causal autoregressiva (a IA não pode "ver o futuro").
-* **Feed-Forward Networks:** Expansão não-linear com ativação ReLU.
-* **Estabilização:** Implementação da arquitetura Pre-Norm com `LayerNorm` e Conexões Residuais (estilo ResNet) para evitar o desaparecimento do gradiente.
+### 📓 Google Colab (Recomendado)
+Se você quer apenas entender a lógica por trás do código sem configurar um ambiente local, **eu recomendo fortemente acessar o [Google Colab do Projeto](LINK_DO_SEU_COLAB_AQUI)**. Lá, o código foi quebrado em blocos interativos com explicações breves, comentários aprofundados sobre as decisões matemáticas e exemplos práticos de execução. É o melhor ponto de partida para explorar a arquitetura!
 
+##  Decisões de Arquitetura
+
+O modelo implementa os blocos fundamentais de redes neurais generativas modernas:
+
+* **Tokenização Nível Industrial:** Utiliza o BPE (*Byte-Pair Encoding*) com o vocabulário `cl100k_base` (o mesmo do GPT-4), mapeando a linguagem humana para um espaço vetorial de $\approx 100k$ dimensões.
+* **Scaled Dot-Product Attention:** Implementação de auto-atenção com múltiplas cabeças (*Multi-Head Attention*). A máscara causal (matriz triangular inferior) é aplicada antes do Softmax para preservar o viés autoregressivo (Seta do Tempo):
+  $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V$$
+* **Estabilidade de Treinamento (Pre-Norm):** Ao contrário do *Attention Is All You Need* original (Post-Norm), este modelo utiliza a arquitetura **Pre-Norm** (Layer Normalization aplicada *antes* das subcamadas), resultando em convergência significativamente mais rápida e estável sem a necessidade de *warm-up steps* complexos.
+* **Conexões Residuais:** Integração de vias expressas (estilo ResNet) `$x = x + \text{Layer}(x)$` para mitigar o desaparecimento de gradientes em blocos profundos.
+
+##  Pipeline de Dados e Otimização
+* **Ingestão Híbrida:** Dataloader personalizado capaz de extrair corpus de texto de múltiplos formatos (`.txt`, `.pdf` via PyMuPDF).
+* **Memory Mapping (`np.memmap`):** O dataset tokenizado é alocado diretamente no disco, permitindo o treinamento sobre arrays de N-Gigabytes sem gargalos de memória RAM (*Out of Memory*).
+* **Otimizador:** Treinamento conduzido pelo `AdamW` com suporte a *Gradient Zeroing* otimizado (`set_to_none=True`) para redução de *overhead* de memória durante o *Backpropagation*.
+
+---
 ##  O Que Eu Aprendi Construindo Isso
 
 Construir essa IA do zero me permitiu dominar conceitos complexos do Machine Learning:
@@ -26,7 +43,7 @@ Construir essa IA do zero me permitiu dominar conceitos complexos do Machine Lea
 ### 1. Instalação
 Clone o repositório e instale as dependências:
 ```bash
-git clone [https://github.com/felipeandrian/cerebro-cyber.git](https://github.com/felipeandrian/cerebro-cyber.git)
+git clone https://github.com/felipeandrian/cerebro-cyber.git
 cd cerebro-cyber
 pip install -r requirements.txt
 
@@ -58,6 +75,16 @@ Após o treinamento gerar o arquivo `.pt`, inicie o motor de inferência:
 python chat.py
 
 ```
+
+
+### Contribuições (Vamos aprender juntos!)
+Este é um projeto voltado para o aprendizado em Inteligência Artificial, toda e qualquer correção, dica de otimização ou refatoração é extremamente bem-vinda!
+
+Se você viu alguma parte do código que pode ser escrita de forma mais "Pythonica", mais eficiente em uso de VRAM, ou se encontrou algum gargalo matemático, por favor, sinta-se à vontade para:
+
+Abrir uma Issue para discutirmos a teoria.
+
+Enviar um Pull Request (PR) com melhorias no código.
 
 > *"O que eu não posso criar, eu não entendo."* — Richard Feynman
 
