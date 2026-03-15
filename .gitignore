@@ -1,0 +1,10 @@
+# Ignorar arquivos pesados de dados e pesos neurais
+*.bin
+*.pt
+__pycache__/
+livros/
+qa/
+chat2.py
+falar.py
+cerebrocyber.py
+dataset_cyber.bin
